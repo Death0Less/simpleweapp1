@@ -44,13 +44,10 @@ public class JdbcEmployeeDao implements EmployeeDao{
     }
 
     @Override
-    public void updateFirstName(long id, String firstName) {
-        jdbcTemplate.update("update employee set first_name = ? where employee_id = ?", firstName, id);
-    }
-
-    @Override
-    public void updateLatsName(long id, String lastName) {
-        jdbcTemplate.update("update employee set last_name = ? where employee_id = ?", lastName, id);
+    public void update(Employee employee) {
+        jdbcTemplate.update("update employee set first_name = ?, last_name = ?, department_id = ?, job_title = ?, " +
+                "gender = ?, date_of_birth = ? where employee_id = ? ", employee.getFirstName(), employee.getLastName(), employee.getDepartmentId(),
+                employee.getJobTitle(), employee.getGender().name(), employee.getDateOfBirth(), employee.getId());
     }
 
     @Override

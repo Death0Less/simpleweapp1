@@ -2,6 +2,7 @@ package com.example.simplewebapp1.service;
 
 import com.example.simplewebapp1.dao.EmployeeDao;
 import com.example.simplewebapp1.dto.EmployeeRequest;
+import com.example.simplewebapp1.dto.EmployeeRequestForUpdate;
 import com.example.simplewebapp1.dto.EmployeeResponse;
 import com.example.simplewebapp1.mapper.EmployeeMapper;
 import com.example.simplewebapp1.model.Employee;
@@ -46,19 +47,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public boolean updateFirstName(long id, String fistName) {
-        if (employeeDao.containsById(id)) {
-            employeeDao.updateFirstName(id, fistName);
-        } else {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public boolean updateLatsName(long id, String lastName) {
-        if (employeeDao.containsById(id)) {
-            employeeDao.updateLatsName(id, lastName);
+    public boolean update(EmployeeRequestForUpdate employeeRequestForUpdate) {
+        Employee employee = employeeMapper.mapEmployeeRequestForUpdateToEmployee(employeeRequestForUpdate);
+        if (employeeDao.containsById(employee.getId())) {
+            employeeDao.update(employee);
         } else {
             return false;
         }

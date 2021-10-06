@@ -2,6 +2,7 @@ package com.example.simplewebapp1.mapper;
 
 
 import com.example.simplewebapp1.dto.EmployeeRequest;
+import com.example.simplewebapp1.dto.EmployeeRequestForUpdate;
 import com.example.simplewebapp1.dto.EmployeeResponse;
 import com.example.simplewebapp1.model.Employee;
 import org.springframework.stereotype.Component;
@@ -42,5 +43,17 @@ public class EmployeeMapper {
             employeeResponsesList.add(employeeResponse);
         }
         return employeeResponsesList;
+    }
+
+    public Employee mapEmployeeRequestForUpdateToEmployee(EmployeeRequestForUpdate employeeRequestForUpdate) {
+        return Employee.builder()
+                .id(employeeRequestForUpdate.getId())
+                .firstName(employeeRequestForUpdate.getFirstName())
+                .lastName(employeeRequestForUpdate.getLastName())
+                .departmentId(employeeRequestForUpdate.getDepartmentId())
+                .jobTitle(employeeRequestForUpdate.getJobTitle())
+                .gender(employeeRequestForUpdate.getGender())
+                .dateOfBirth(employeeRequestForUpdate.getDateOfBirth())
+                .build();
     }
 }

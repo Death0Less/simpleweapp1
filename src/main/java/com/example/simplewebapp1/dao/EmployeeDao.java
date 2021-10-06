@@ -11,8 +11,7 @@ public interface EmployeeDao {
     Employee findById(long id);
     List<Employee> findByLastName(String lastName);
     List<Employee> findAll();
-    void updateFirstName(long id, String fistName);
-    void updateLatsName(long id, String lastName);
+    void update(Employee employee);
     boolean containsById(long id);
     boolean containsByLastName(String lastName);
 }

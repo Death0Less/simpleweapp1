@@ -1,6 +1,7 @@
 package com.example.simplewebapp1.controller;
 
 import com.example.simplewebapp1.dto.EmployeeRequest;
+import com.example.simplewebapp1.dto.EmployeeRequestForUpdate;
 import com.example.simplewebapp1.dto.EmployeeResponse;
 import com.example.simplewebapp1.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
@@ -47,18 +48,9 @@ public class EmployeeController {
         return new ResponseEntity(employeeResponseList, HttpStatus.FOUND);
     }
 
-    @PutMapping("/firstName/{id}")
-    public ResponseEntity<?> updateFirstName(@PathVariable long id, @RequestParam String firstName) {
-        if (employeeService.updateFirstName(id, firstName)) {
-            return new ResponseEntity(HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @PutMapping("/lastName/{id}")
-    public ResponseEntity<?> updateLastName(@PathVariable long id, @RequestParam String lastName) {
-        if (employeeService.updateLatsName(id, lastName)) {
+    @PutMapping
+    public ResponseEntity<?> update(@RequestBody EmployeeRequestForUpdate employeeRequestForUpdate) {
+        if (employeeService.update(employeeRequestForUpdate)) {
             return new ResponseEntity(HttpStatus.OK);
         } else {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
