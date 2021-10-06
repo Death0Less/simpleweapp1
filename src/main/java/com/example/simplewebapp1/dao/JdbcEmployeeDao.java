@@ -34,6 +34,11 @@ public class JdbcEmployeeDao implements EmployeeDao{
     }
 
     @Override
+    public List<Employee> findByLastName(String lastName) {
+        return jdbcTemplate.query("select * from employee where last_name = ?", new Object[]{lastName}, new EmployeeRowMapper());
+    }
+
+    @Override
     public List<Employee> findAll() {
         return jdbcTemplate.query("select * from employee", new EmployeeRowMapper());
     }

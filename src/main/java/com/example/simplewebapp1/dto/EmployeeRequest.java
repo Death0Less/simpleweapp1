@@ -1,5 +1,6 @@
-package com.example.simplewebapp1.model;
+package com.example.simplewebapp1.dto;
 
+import com.example.simplewebapp1.model.Gender;
 import lombok.*;
 
 import java.util.Date;
@@ -10,9 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 @Builder
-public class Employee {
-
-    private long id;
+public class EmployeeRequest {
 
     private String firstName;
 

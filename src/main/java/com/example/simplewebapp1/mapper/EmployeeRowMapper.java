@@ -3,11 +3,13 @@ package com.example.simplewebapp1.mapper;
 import com.example.simplewebapp1.model.Employee;
 import com.example.simplewebapp1.model.Gender;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@Component
 public class EmployeeRowMapper implements RowMapper<Employee> {
 
     @Override

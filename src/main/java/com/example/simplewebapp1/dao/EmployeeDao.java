@@ -9,6 +9,7 @@ public interface EmployeeDao {
     void save(Employee employee);
     void deleteById(long id);
     Employee findById(long id);
+    List<Employee> findByLastName(String lastName);
     List<Employee> findAll();
     void updateFirstName(long id, String fistName);
     void updateLatsName(long id, String lastName);

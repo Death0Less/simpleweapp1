@@ -1,6 +1,7 @@
 package com.example.simplewebapp1.controller;
 
-import com.example.simplewebapp1.model.Employee;
+import com.example.simplewebapp1.dto.EmployeeRequest;
+import com.example.simplewebapp1.dto.EmployeeResponse;
 import com.example.simplewebapp1.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,8 +18,8 @@ public class EmployeeController {
     private final EmployeeService employeeService;
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody Employee employee) {
-        employeeService.save(employee);
+    public ResponseEntity<?> save(@RequestBody EmployeeRequest employeeRequest) {
+        employeeService.save(employeeRequest);
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
@@ -30,22 +31,29 @@ public class EmployeeController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable long id) {
-        Employee employee = employeeService.findById(id);
-        return new ResponseEntity(employee, HttpStatus.FOUND);
+        EmployeeResponse employeeResponse = employeeService.findById(id);
+        return new ResponseEntity(employeeResponse, HttpStatus.FOUND);
+    }
+
+    @GetMapping("/lastName")
+    public ResponseEntity<?> findByLastName(@RequestParam String lastName) {
+        List<EmployeeResponse> employeeResponseList = employeeService.findByLastName(lastName);
+        return new ResponseEntity(employeeResponseList, HttpStatus.FOUND);
     }
 
     @GetMapping
     public ResponseEntity<?> findAll() {
-        List<Employee> employeeList = employeeService.findAll();
-        return new ResponseEntity(employeeList, HttpStatus.FOUND);
+        List<EmployeeResponse> employeeResponseList = employeeService.findAll();
+        return new ResponseEntity(employeeResponseList, HttpStatus.FOUND);
     }
 
     @PutMapping("/firstName/{id}")
     public ResponseEntity<?> updateFirstName(@PathVariable long id, @RequestParam String firstName) {
         if (employeeService.updateFirstName(id, firstName)) {
             return new ResponseEntity(HttpStatus.OK);
-        }  else
+        } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PutMapping("/lastName/{id}")
