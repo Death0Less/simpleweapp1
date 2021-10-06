@@ -55,15 +55,17 @@ class EmployeeDaoTests {
         Assertions.assertTrue(employeeList.size() > 0);
     }
 
-    @Test
-    void updateFirstName() {
-        employeeDao.updateFirstName(8L, "newTestName");
-        Assertions.assertEquals(employeeDao.findById(8l).getFirstName(), "newTestName");
-    }
-
-    @Test
-    void updateLastName() {
-        employeeDao.updateLatsName(10L, "newLastName");
-        Assertions.assertEquals(employeeDao.findById(10L).getLastName(), "newLastName");
+   @Test
+    void update() {
+        Employee employee = new Employee();
+        employee.setId(5L);
+        employee.setFirstName("ttttt");
+        employee.setLastName("ttttt");
+        employee.setDepartmentId(5L);
+        employee.setJobTitle("ttttt");
+        employee.setGender(Gender.FEMALE);
+        employee.setDateOfBirth(new Date());
+        employeeDao.update(employee);
+        Assertions.assertEquals(employee.getLastName(), "ttttt");
     }
 }
